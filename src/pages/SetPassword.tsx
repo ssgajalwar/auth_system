@@ -22,27 +22,16 @@ const SetPassword : React.FC<SetPasswordProps> = ({navigation}) => {
     const [oldPass,setOldPass] = useState('')
     const [newPass,setNewPass] = useState('')
     const [confPass,setConfPass] = useState('')
-    const [element,setElement] = useState(<></>)
+    const [errMessage,setErrorMessage] = useState(false)
     const [loggedin,setLoggedin] = useState(false)
-    const getElement = () => {
-      if( oldPass == data.password &&  newPass != oldPass &&  newPass == confPass) {
-        return( 
-                <View style={{display:'flex',flexDirection:'row'}}>
-                  <Image source={Checked} style={styles.checked}/> 
-                  <Text> Allow user to set their own password on first login.</Text>
-                </View>
-              ) 
-          
-      }else{
-        return <Text style={styles.notmatching}>The passwords do not match</Text>;
-      }
-    }
-
     const handleLoginClick = () => {
-      navigation.navigate('Login')
+      if(oldPass == data.password && newPass == confPass){
+        navigation.navigate('Login')
+      }else{
+        setErrorMessage(true)
+      } 
     }
     const handleSetPassword = () => {      
-      setElement(getElement())
       setTimeout(()=>{
         setLoggedin(true)
       })
@@ -65,7 +54,13 @@ const SetPassword : React.FC<SetPasswordProps> = ({navigation}) => {
           <InputComponent placeholder='Old Password' secureText={true} setValue={setOldPass} value={oldPass}/>
           <InputComponent placeholder='New Password' secureText={true} setValue={setNewPass} value={newPass}/>
           <InputComponent placeholder='Confirm Password' secureText={true} setValue={setConfPass} value={confPass}/>
-          {element}
+          { oldPass == data.password && newPass == confPass &&
+          <View style={{display:'flex',flexDirection:'row'}}>
+            <Image source={Checked} style={styles.checked}/> 
+            <Text> Allow user to set their own password on first login.</Text>
+          </View> 
+          }
+          {!(newPass == confPass) && <Text style={styles.notmatching}>The passwords do not match</Text> }
         </>
         
 
@@ -73,7 +68,10 @@ const SetPassword : React.FC<SetPasswordProps> = ({navigation}) => {
       </Form>
       {loggedin ?  
       <ButtonWrapper title='Log In' enabled={true} handlePress={handleLoginClick}/>:
-      <ButtonWrapper title='Set New Password' enabled={false} handlePress={handleSetPassword}/>
+      <ButtonWrapper 
+        title='Set New Password' 
+        enabled={newPass == confPass ? true : false} 
+        handlePress={handleSetPassword}/>
       }
     </View>
   );
@@ -89,6 +87,7 @@ const styles = StyleSheet.create({
   text:{
     color: "#1D1D1D",
     fontSize:18,
+    fontWeight:'600'
   },
   paragraph:{
     color:"#fff",
@@ -111,11 +110,14 @@ const styles = StyleSheet.create({
   },
   successHeading:{
     fontSize:20,
-    textAlign:'center'
+    textAlign:'center',
+    fontWeight:'600',
+    marginTop:20
   },
   successParagraph:{
     fontSize:16,
-    textAlign:'center'
+    textAlign:'center',
+    marginTop:20
   }
 });
 

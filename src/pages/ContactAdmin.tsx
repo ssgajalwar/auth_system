@@ -49,9 +49,9 @@ const styles = StyleSheet.create({
   },
   textContainer:{
     display:'flex',
-    gap:30,
+    gap:20,
     paddingHorizontal:20,
-    paddingVertical:30,
+    paddingVertical:0,
     textAlign:'center',
     textAlignVertical:'center',
     height:'50%'
@@ -60,7 +60,8 @@ const styles = StyleSheet.create({
     color:"#fff",
     fontSize:24,
     textAlign:'center',
-    marginBottom:10
+    marginTop:-30,
+    marginBottom:20
   },
   subHeading:{
     color:"#fff",
@@ -70,7 +71,8 @@ const styles = StyleSheet.create({
   paragraph:{
     color:"#fff",
     fontSize:14,
-    textAlign:'center'
+    textAlign:'center',
+    marginTop:50
   }
 });
 

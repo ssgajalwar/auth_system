@@ -24,15 +24,16 @@ const ImageBanner : React.FC<ImageBannerProps> = ({children,image,opacity}) => {
 const styles = StyleSheet.create({
     container: {
         margin:10,
-        height:"42%",
+        height:"37%",
         width:"100%",
-        paddingVertical:60,
-        paddingHorizontal:30
-        // backgroundColor:'#fff'        
+        paddingVertical:30,
+        paddingHorizontal:30,
+        justifyContent:'center'
+        
     },
     image : {
         width:'auto',
-        height:"100%",
+        height:"80%",
         resizeMode:'contain',
         opacity:1
         // backgroundColor:'black'

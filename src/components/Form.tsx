@@ -1,4 +1,4 @@
-import React,  { ReactNode } from 'react'
+import React,  { ReactNode, useState } from 'react'
 import { Text, View,StyleSheet } from 'react-native'
 
 interface FormProps {
@@ -6,6 +6,8 @@ interface FormProps {
 }
 
 const Form : React.FC<FormProps> = ({children}) => {
+
+  
   return (
     <View style={styles.container}>
        {children}
@@ -16,8 +18,8 @@ const Form : React.FC<FormProps> = ({children}) => {
 const styles = StyleSheet.create({
     container:{
         display:'flex',
-        gap:30,
-        height:"50%",
+        gap:10,
+        height:"53%",
         backgroundColor:"#fff",
         width:"100%",
         borderTopLeftRadius:40,
